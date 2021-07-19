@@ -129,10 +129,11 @@ class _TitleScrollNavigationState extends State<TitleScrollNavigation> {
 
     _titlesController.jumpTo(jumpTo);
 
-    if (current != _currentPage) _currentPage = current;
-
-    // Fork addition: call to the callback, if registered
-    if (widget.onPageChange != null) widget.onPageChange!(_currentPage);
+    if (current != _currentPage) {
+      _currentPage = current;
+      // Fork addition: call to the callback, if registered
+      if (widget.onPageChange != null) widget.onPageChange!(_currentPage);
+    }
   }
 
   //---------//
