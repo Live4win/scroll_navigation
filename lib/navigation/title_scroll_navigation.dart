@@ -25,6 +25,7 @@ class TitleScrollNavigation extends StatefulWidget {
     required this.titles,
     required this.pages,
     this.initialPage = 0,
+    this.onPageChange,
     this.showIdentifier = true,
     NavigationBodyStyle? bodyStyle,
     TitleNavigationBarStyle? barStyle,
@@ -44,6 +45,9 @@ class TitleScrollNavigation extends StatefulWidget {
   /// It is the initial page that will show. The value must match
   /// with the existing indexes and the total number of Nav Items
   final int initialPage;
+
+  /// Fork addition: added a callback for each page change
+  final void Function(int index)? onPageChange;
 
   ///It will show the identifier.
   final bool showIdentifier;
@@ -126,6 +130,9 @@ class _TitleScrollNavigationState extends State<TitleScrollNavigation> {
     _titlesController.jumpTo(jumpTo);
 
     if (current != _currentPage) _currentPage = current;
+
+    // Fork addition: call to the callback, if registered
+    if (widget.onPageChange != null) widget.onPageChange!(_currentPage);
   }
 
   //---------//
